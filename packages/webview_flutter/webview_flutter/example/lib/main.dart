@@ -146,7 +146,7 @@ Page resource error:
           );
         },
       )
-      ..loadRequest(Uri.parse('https://flutter.dev'));
+      ..loadRequest(Uri.parse('https://m.ritao.hk/Tools/calculator?type=tax&parcel_tax=20220420'));
 
     // #docregion platform_features
     if (controller.platform is AndroidWebViewController) {
@@ -180,7 +180,7 @@ Page resource error:
     return FloatingActionButton(
       onPressed: () async {
         final String? url = await _controller.currentUrl();
-        if (context.mounted) {
+        if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Favorited $url')),
           );
@@ -332,7 +332,7 @@ class SampleMenu extends StatelessWidget {
   Future<void> _onListCookies(BuildContext context) async {
     final String cookies = await webViewController
         .runJavaScriptReturningResult('document.cookie') as String;
-    if (context.mounted) {
+    // if (context.mounted) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Column(
           mainAxisAlignment: MainAxisAlignment.end,
@@ -343,18 +343,18 @@ class SampleMenu extends StatelessWidget {
           ],
         ),
       ));
-    }
+    // }
   }
 
   Future<void> _onAddToCache(BuildContext context) async {
     await webViewController.runJavaScript(
       'caches.open("test_caches_entry"); localStorage["test_localStorage"] = "dummy_entry";',
     );
-    if (context.mounted) {
+    // if (context.mounted) {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text('Added a test entry to cache.'),
       ));
-    }
+    // }
   }
 
   Future<void> _onListCache() {
@@ -367,11 +367,11 @@ class SampleMenu extends StatelessWidget {
   Future<void> _onClearCache(BuildContext context) async {
     await webViewController.clearCache();
     await webViewController.clearLocalStorage();
-    if (context.mounted) {
+    // if (context.mounted) {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text('Cache cleared.'),
       ));
-    }
+    // }
   }
 
   Future<void> _onClearCookies(BuildContext context) async {
@@ -380,11 +380,11 @@ class SampleMenu extends StatelessWidget {
     if (!hadCookies) {
       message = 'There are no cookies.';
     }
-    if (context.mounted) {
+    // if (context.mounted) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text(message),
       ));
-    }
+    // }
   }
 
   Future<void> _onNavigationDelegateExample() {
@@ -477,11 +477,11 @@ class NavigationControls extends StatelessWidget {
             if (await webViewController.canGoBack()) {
               await webViewController.goBack();
             } else {
-              if (context.mounted) {
+              // if (context.mounted) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(content: Text('No back history item')),
                 );
-              }
+              // }
             }
           },
         ),
@@ -491,11 +491,11 @@ class NavigationControls extends StatelessWidget {
             if (await webViewController.canGoForward()) {
               await webViewController.goForward();
             } else {
-              if (context.mounted) {
+              // if (context.mounted) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(content: Text('No forward history item')),
                 );
-              }
+              // }
             }
           },
         ),
